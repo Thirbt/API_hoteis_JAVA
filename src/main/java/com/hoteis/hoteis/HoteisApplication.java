@@ -6,8 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.hoteis.hoteis.enums.UserRoleEnum;
 import com.hoteis.hoteis.models.Hotel;
+import com.hoteis.hoteis.models.Usuario;
 import com.hoteis.hoteis.repository.HotelRepository;
+import com.hoteis.hoteis.repository.UsuarioRepository;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -21,7 +24,7 @@ public class HoteisApplication {
 	}
 
 	@Bean
-	public CommandLineRunner inicializador(@Autowired HotelRepository hotelRepository){
+	public CommandLineRunner inicializador(@Autowired HotelRepository hotelRepository, @Autowired UsuarioRepository usuarioRepository){
 		return argumento -> {
 
 			Hotel hotel1 = new Hotel();
@@ -50,7 +53,27 @@ public class HoteisApplication {
 			hotel3.setEstrelas(3.2);
 
 			hotelRepository.save(hotel3);
+
+			Usuario usuario1 = new Usuario();
+			usuario1.setNome("admin");
+			usuario1.setEmail("admin.email@hotmail.com");
+			usuario1.setRole(UserRoleEnum.ADMIN);
+
+			usuarioRepository.save(usuario1);
+
+			Usuario usuario2 = new Usuario();
+			usuario2.setNome("user");
+			usuario2.setEmail("user.email@hotmail.com");
+			usuario2.setRole(UserRoleEnum.USER);
+
+			usuarioRepository.save(usuario2);
+
+			Usuario usuario3 = new Usuario();
+			usuario3.setNome("guest");
+			usuario3.setEmail("guest.email@hotmail.com");
+			usuario3.setRole(UserRoleEnum.GUEST);
+
+			usuarioRepository.save(usuario3);
 		};
 	}
-
 }
