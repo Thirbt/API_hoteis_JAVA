@@ -29,7 +29,7 @@ public class HotelService implements HotelServiceContract{
         if (hotel.isPresent()) {
             return hotel.get();
         }else{
-            throw new NotFoundError("Não foi possível encontrar o hotel com o ID: " + id + " informado");
+            throw new NotFoundError("Não foi possível encontrar o hotel com o ID: " + id);
         }
     }
 

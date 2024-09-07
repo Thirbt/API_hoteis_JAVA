@@ -29,7 +29,7 @@ public class UsuarioService implements UsuarioServiceContract{
         if (usuarioEncontrado.isPresent()) {
             return usuarioEncontrado.get();
         } else {
-            throw new NotFoundError("Usuário não encontrado com o ID: " + id + " informado");
+            throw new NotFoundError("Usuário não encontrado com o ID: " + id);
         }
     }
 
