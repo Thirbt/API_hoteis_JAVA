@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,14 +15,15 @@ import com.hoteis.hoteis.models.Usuario;
 import com.hoteis.hoteis.service.UsuarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
 @RestController
+@Slf4j
 @RequestMapping(value = "/usuario", produces = { "application/json" })
 @Tag(name = "Usuários")
 public class UsuarioController {
@@ -54,6 +56,7 @@ public class UsuarioController {
         @ApiResponse(responseCode = "200", description = "Inserção realizada com sucesso")
     })
     public Usuario inserirUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        log.info("Recebendo informação json: {}", usuarioDTO);
         return usuarioService.inserirUsuario(usuarioDTO);
     }
 
