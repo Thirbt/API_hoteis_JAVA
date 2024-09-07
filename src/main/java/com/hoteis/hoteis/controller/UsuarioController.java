@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hoteis.hoteis.dto.UsuarioDTO;
 import com.hoteis.hoteis.models.Usuario;
 import com.hoteis.hoteis.service.UsuarioService;
 
@@ -52,8 +53,8 @@ public class UsuarioController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Inserção realizada com sucesso")
     })
-    public Usuario inserirUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.inserirUsuario(usuario);
+    public Usuario inserirUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        return usuarioService.inserirUsuario(usuarioDTO);
     }
 
     @PutMapping("{id}")
@@ -62,8 +63,8 @@ public class UsuarioController {
         @ApiResponse(responseCode = "200", description = "Edição realizada com sucesso"),
         @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     })
-    public Usuario editarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-        return usuarioService.editarUsuario(id, usuario);
+    public Usuario editarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        return usuarioService.editarUsuario(id, usuarioDTO);
     }
 
     @DeleteMapping("{id}")
@@ -75,5 +76,4 @@ public class UsuarioController {
     public void deletarUsuario(@PathVariable Long id) {
         usuarioService.deletarUsuario(id);
     }
-
 }
