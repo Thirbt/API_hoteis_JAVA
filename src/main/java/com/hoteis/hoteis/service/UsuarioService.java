@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hoteis.hoteis.dto.UsuarioDTO;
 import com.hoteis.hoteis.exception.NotFoundError;
 import com.hoteis.hoteis.models.Usuario;
 import com.hoteis.hoteis.repository.UsuarioRepository;
@@ -33,18 +34,23 @@ public class UsuarioService implements UsuarioServiceContract{
     }
 
     @Override
-    public Usuario inserirUsuario(Usuario usuario) {
+    public Usuario inserirUsuario(UsuarioDTO usuarioDTO) {
+        Usuario usuario = Usuario.builder()
+        .nome(usuarioDTO.getNome())
+        .email(usuarioDTO.getEmail())
+        .role(usuarioDTO.getRole())
+        .build();
         return usuarioRepository.save(usuario);
     }
 
     @Override
-    public Usuario editarUsuario(Long id, Usuario usuario) {
+    public Usuario editarUsuario(Long id, UsuarioDTO usuarioDTO) {
         Usuario usuarioEncontrado = obterUsuarioPorId(id);
         Usuario usuarioEditado = Usuario.builder()
         .id(usuarioEncontrado.getId())
-        .nome(usuario.getNome())
-        .email(usuario.getEmail())
-        .role(usuario.getRole())
+        .nome(usuarioDTO.getNome())
+        .email(usuarioDTO.getEmail())
+        .role(usuarioDTO.getRole())
         .build();
         return usuarioRepository.save(usuarioEditado);
     }
